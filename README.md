@@ -22,9 +22,8 @@ This application allows the user to:
 
 ## How to Use
 
-```
 Open your terminal and change into the corresponding directory. Run "node app.js" and you will be prompted with options.
-```
+
 
 ## Database
 
