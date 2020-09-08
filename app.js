@@ -17,7 +17,7 @@ connection.connect(function(err){
     options();
 })
 
-// propts user with list of options to choose from
+// prompts user with list of options to choose from
 function options() {
     inquirer
     .prompt({
@@ -29,8 +29,10 @@ function options() {
                 "View all departments",
                 "View all roles",
                 "Add an employee",
-                "Add department",
+                "Add a department",
                 "Add a role",
+                "Update employee role",
+                "Delete an employee",
                 "EXIT"
         ]
     }).then(function (answer) {
@@ -47,11 +49,17 @@ function options() {
             case "Add an employee":
                 addEmployee();
                 break;
-            case "Add department":
+            case "Add a department":
                 addDepartment();
                 break;
             case "Add a role":
                 addRole();
+                break;
+            case "Update employee role":
+                updateRole();
+                break;
+            case "Delete an employee":
+                deleteEmployee();
                 break;
             case "EXIT": 
                 exitApp();
@@ -62,30 +70,53 @@ function options() {
     })
 }
 
+// view all employees in the database
 function viewEmployees() {
-  
+    var query = "SELECT * FROM employee";
+    connection.query(query, function(err, res) {
+        if (err) throw err;
+        console.log(res.length + " employees found!");
+        console.table('All Employees:', res); 
+        exitApp();
+    })
 }
 
+// view all departments in the database
 function viewDepartments() {
    
 }
 
+// view all roles in the database
 function viewRoles() {
   
 }
 
+// add an employee to the database
 function addEmployee() {
 
 }
 
+// add a department to the database
 function addDepartment() {
 
 }
 
+// add a role to the database
 function addRole() {
 
 }
 
+// update a role in the database
+function updateRole() {
+
+}
+
+//  delete an employee
+function deleteEmployee() {
+
+}
+
+// exit the app
 function exitApp() {
 
 }
