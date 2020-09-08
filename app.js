@@ -103,7 +103,54 @@ function viewRoles() {
 
 // add an employee to the database
 function addEmployee() {
-
+    connection.query("SELECT * FROM role", function (err, res) {
+        if (err) throw err;
+        inquirer
+            .prompt([
+                {
+                    name: "first_name",
+                    type: "input", 
+                    message: "What is the employee's fist name? ",
+                },
+                {
+                    name: "last_name",
+                    type: "input", 
+                    message: "What is the employee's last name? "
+                },
+                {
+                    name: "role", 
+                    type: "list",
+                    choices: function() {
+                    var roleArray = [];
+                    for (let i = 0; i < res.length; i++) {
+                        roleArray.push(res[i].title);
+                    }
+                    return roleArray;
+                    },
+                    message: "What is this employee's role? "
+                }
+                ]).then(function (answer) {
+                    let roleID;
+                    for (let a = 0; a < res.length; a++) {
+                    if (res[a].title == answer.role) {
+                        roleID = res[a].id;
+                        console.log(roleID)
+                    }                  
+                    }  
+                    connection.query(
+                    "INSERT INTO employee SET ?",
+                    {
+                        first_name: answer.first_name,
+                        last_name: answer.last_name,
+                        role_id: roleID,
+                    },
+                    function (err) {
+                        if (err) throw err;
+                        console.log("Your employee has been added!");
+                        options();
+                    })
+                })
+        })
 };
 
 // add a department to the database
