@@ -118,6 +118,11 @@ function addEmployee() {
                     message: "What is the employee's last name? "
                 },
                 {
+                    name: 'manager_id',
+                    type: 'input', 
+                    message: "What is the employee's manager's ID? "
+                },
+                {
                     name: 'role', 
                     type: 'list',
                     choices: function() {
@@ -142,6 +147,7 @@ function addEmployee() {
                     {
                         first_name: answer.first_name,
                         last_name: answer.last_name,
+                        manager_id: answer.manager_id,
                         role_id: roleID,
                     },
                     function (err) {
